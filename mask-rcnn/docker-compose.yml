@@ -1,0 +1,20 @@
+version: '2.3'
+services:
+  mrcnn:
+    image: mask-rcnn:v0.0.1
+    build:
+      context: .
+      args:
+        user: ${dUSER}
+        group: ${dGROUP}
+        uid: ${dUID}
+        gid: ${dGID}
+    user: "${dUID?err}:${dGID?err}"
+    #user: nicholas:nicholas
+    runtime: nvidia
+    tty: true
+    ports:
+    - "${dPORT?err}:8888"
+    volumes:
+    - "${dDRIVE?err}:/data"
+    - "${dWORKSPACE?err}:/home/${dUSER}/workspace"
