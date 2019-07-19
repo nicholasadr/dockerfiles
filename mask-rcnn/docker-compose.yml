@@ -1,7 +1,7 @@
 version: '2.3'
 services:
   mrcnn:
-    image: mask-rcnn:v0.0.1
+    image: mask-rcnn:v0.0.2
     build:
       context: .
       args:
@@ -10,7 +10,6 @@ services:
         uid: ${dUID}
         gid: ${dGID}
     user: "${dUID?err}:${dGID?err}"
-    #user: nicholas:nicholas
     runtime: nvidia
     tty: true
     ports:
