@@ -1,7 +1,7 @@
 version: '2.3'
 services:
   unet-tf:
-    image: unet-tf:v0.0.1
+    image: unet-tf:v0.0.2
     build:
       context: .
       args:
@@ -13,7 +13,8 @@ services:
     runtime: nvidia
     tty: true
     ports:
-    - "${dPORT?err}:8888"
+    - "${dJUPYTER_PORT?err}:8888"
+    - "${dTENSORBOARD_PORT?err}:6006"
     volumes:
     - "${dDRIVE?err}:/data"
     - "${dWORKSPACE?err}:/home/${dUSER}/workspace"

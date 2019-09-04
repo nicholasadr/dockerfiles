@@ -32,7 +32,7 @@ USER ${user}
 # tf_unet
 RUN pip3 install --no-cache-dir --user --upgrade pip setuptools
 RUN git clone https://github.com/jakeret/tf_unet.git
-RUN cd tf_unet && pip3 install --no-cache-dir --user -r $(grep -ivE "tensorflow" requirements.txt) \
+RUN cd tf_unet && pip3 install --no-cache-dir --user $(grep -ivE "tensorflow" requirements.txt) \
     "tensorflow-gpu>=1.3.0" && \
     python3 setup.py install --user
 
