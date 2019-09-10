@@ -35,6 +35,8 @@ RUN git clone https://github.com/jakeret/tf_unet.git
 RUN cd tf_unet && pip3 install --no-cache-dir --user $(grep -ivE "tensorflow" requirements.txt) \
     "tensorflow-gpu>=1.3.0" && \
     python3 setup.py install --user
+# Upgrade absl-py in conflict with logging: https://github.com/tensorflow/tensorflow/issues/26691
+RUN pip3 install --no-cache-dir --user --upgrade absl-py
 
 # Jupyter Notebook
 # Allow access from outside the container, and skip trying to open a browser.
