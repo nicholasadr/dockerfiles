@@ -17,7 +17,7 @@ RUN echo 'Etc/UTC' > /etc/timezone && \
     apt update && apt install -q -y tzdata && rm -rf /var/lib/apt/lists/*
 
 RUN apt update && \
-    apt install -q -y wget git openssh-server dirmngr gnupg2 lsb-release && \
+    apt install -q -y wget git vim openssh-server dirmngr gnupg2 lsb-release && \
     rm -rf /var/lib/apt/lists/*
 
 RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys F42ED6FBAB17C654
@@ -81,15 +81,15 @@ RUN echo "source /home/${user}/catkin_ws/devel/setup.bash" >> ~/.bashrc
 # Source bashrc
 RUN ["/bin/bash", "-c", "source ~/.bashrc"]
 
-# Install Sensorstick SDK
+# Install Sensorstick ros driver
 RUN cd catkin_ws/src && wstool merge perception_tutorials/sensorstick.rosinstall && \
     wstool update -j8
 
-# Install Kinect V2 SDK
+# Install Kinect V2 ros driver
 RUN cd catkin_ws/src && wstool merge perception_tutorials/kinectv2.rosinstall && \
     wstool update -j8
 
-# Install Kinect Azure SDK
+# Install Kinect Azure ros driver
 RUN cd catkin_ws/src && wstool merge perception_tutorials/azure.rosinstall && \
     wstool update -j8
 
@@ -97,3 +97,6 @@ WORKDIR /home/${user}/catkin_ws
 
 # Build workspace
 RUN ["/bin/bash", "-c", "catkin build perception_tutorials"]
+
+# Build 3D object segmentation
+RUN ["/bin/bash", "-c", "catkin build simple_object_detector"]
