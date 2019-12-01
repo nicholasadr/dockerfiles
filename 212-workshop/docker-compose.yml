@@ -1,0 +1,18 @@
+version: '3'
+services:
+  workshop:
+    image: workshop:v0.0.1
+    build:
+      context: .
+      args:
+        user: ${dUSER}
+        group: ${dGROUP}
+        uid: ${dUID}
+        gid: ${dGID}
+    user: "${dUID?err}:${dGID?err}"
+    tty: true
+    ports:
+    - "${dPORT?err}:8888"
+    volumes:
+    - "${dDRIVE?err}:/data"
+    - "${dWORKSPACE?err}:/home/${dUSER}/workspace"
