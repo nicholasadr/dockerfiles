@@ -1,4 +1,4 @@
-version: '3'
+version: '2.3'
 services:
   workshop:
     image: workshop:v0.0.1
@@ -10,9 +10,15 @@ services:
         uid: ${dUID}
         gid: ${dGID}
     user: "${dUID?err}:${dGID?err}"
+    runtime: nvidia
     tty: true
     ports:
     - "${dPORT?err}:8888"
     volumes:
     - "${dDRIVE?err}:/data"
     - "${dWORKSPACE?err}:/home/${dUSER}/workspace"
+    - "/tmp/.X11-unix:/tmp/.X11-unix:rw"
+    - "/tmp/.docker.xauth:/tmp/.docker.xauth:rw"
+    environment:
+    - "XAUTHORITY=/tmp/.docker.xauth"
+    - "DISPLAY"
