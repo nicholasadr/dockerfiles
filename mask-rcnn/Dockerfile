@@ -35,7 +35,7 @@ RUN git clone https://github.com/matterport/Mask_RCNN.git
 # Training on multiple GPUs fail unless keras==2.1.3
 # https://github.com/matterport/Mask_RCNN/issues/511
 RUN cd Mask_RCNN && pip3 install --no-cache-dir --user $(grep -ivE "tensorflow|keras" requirements.txt) \
-    "tensorflow-gpu>=1.3.0" "keras==2.1.3"
+    "tensorflow-gpu>=1.3.0,<2.0" "keras==2.1.3"
 #RUN cd Mask_RCNN && python3 setup.py install
 
 # Jupyter Notebook
