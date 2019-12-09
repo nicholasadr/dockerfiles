@@ -1,7 +1,7 @@
 version: '2.3'
 services:
   mrcnn:
-    image: mask-rcnn:v0.0.2
+    image: mask-rcnn:v0.0.4
     build:
       context: .
       args:

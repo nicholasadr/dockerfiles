@@ -41,7 +41,7 @@ RUN cd Mask_RCNN && pip3 install --no-cache-dir --user $(grep -ivE "tensorflow|k
 # Jupyter Notebook
 # Allow access from outside the container, and skip trying to open a browser.
 # NOTE: disable authentication token for convenience. DON'T DO THIS ON A PUBLIC SERVER.
-RUN pip3 install --no-cache-dir --user jupyter && \
+RUN pip3 install --no-cache-dir --user jupyter scikit-learn && \
     mkdir .jupyter && \
     echo "c.NotebookApp.ip = '0.0.0.0'" \
          "\nc.NotebookApp.open_browser = False" \
