@@ -16,6 +16,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 RUN apt update && \
     apt install --no-install-recommends -q -y \
     gnupg2 lsb-release \
+    net-tools iputils-ping \
     git vim sudo && rm -rf /var/lib/apt/lists/*
 
 RUN groupadd -g ${gid} ${group} && \
@@ -26,7 +27,7 @@ RUN echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc
 RUN apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
 
 RUN apt update && apt install --no-install-recommends -q -y \
-    ros-${ROS_DISTRO}-ros-core \
+    ros-${ROS_DISTRO}-ros-core ros-${ROS_DISTRO}-rqt-joint-trajectory-controller \
     python-rosdep \
     python-rosinstall \
     python-vcstools \
@@ -50,7 +51,8 @@ RUN mkdir -p catkin_ws/src && cd catkin_ws && \
     catkin config --merge-devel
 
 RUN cd catkin_ws/src && wstool init && \
-    wstool set universal_robot --git https://github.com/ros-industrial/universal_robot.git -v ${ROS_DISTRO}-devel -y && \
+    wstool set universal_robot --git https://github.com/UniversalRobots/Universal_Robots_ROS_Driver.git -v master -y && \
+    wstool set fmauch_universal_robot --git https://github.com/fmauch/universal_robot.git -v calibration_devel -y && \
     wstool update -j8
 
 # Ignore the rosdep update warning
