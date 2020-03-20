@@ -30,4 +30,4 @@ xauth nlist $DISPLAY | sed -e 's/^..../ffff/' | xauth -f $XAUTH nmerge -
 
 docker-compose build
 docker-compose up -d
-docker-compose exec ur18m /bin/bash
+docker-compose exec ri_ur18m /bin/bash

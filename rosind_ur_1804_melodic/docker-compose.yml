@@ -1,7 +1,7 @@
 version: '2.3'
 services:
-  ur18m:
-    image: ur-1804-melodic:v0.0.1
+  ri_ur18m:
+    image: rosind-ur-1804-melodic:v0.0.1
     hostname: docker
     build:
       context: .

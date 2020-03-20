@@ -6,7 +6,7 @@
 2. Modify .env
 
      ```
-     cd dockerfiles/ur-1804-melodic/
+     cd dockerfiles/rosind_ur_1804_melodic/
      cat .env
      ```
 
