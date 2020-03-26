@@ -1,0 +1,24 @@
+version: '2.3'
+services:
+  orpyD18m:
+    image: openrave-denso-1804-melodic:v1.0.0
+    network_mode: "host"
+    privileged: true
+    build:
+      context: .
+      args:
+        user: ${dUSER}
+        group: ${dGROUP}
+        uid: ${dUID}
+        gid: ${dGID}
+    user: "${dUID?err}:${dGID?err}"
+    runtime: nvidia
+    tty: true
+    environment:
+    - "XAUTHORITY=/tmp/.docker.xauth"
+    - "DISPLAY"
+    volumes:
+    - "/tmp/.X11-unix:/tmp/.X11-unix:rw"
+    - "/tmp/.docker.xauth:/tmp/.docker.xauth:rw"
+    - "${dDRIVE?err}:/data"
+    - "${dWORKSPACE?err}:/home/${dUSER}/workspace"
