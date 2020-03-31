@@ -93,10 +93,9 @@ RUN sudo apt update && \
     ROSDEP_SOURCE_PATH=${ROSDEP_SRC} rosdep update && \
     sudo rosdep install --rosdistro ${ROS_DISTRO} --ignore-src --from-paths catkin_ws/src -y
 
-RUN echo "source /home/${user}/catkin_ws/devel/setup.bash" >> ~/.bashrc
-
 WORKDIR /home/${user}/catkin_ws
 
 # Build workspace
 RUN ["/bin/bash", "-c", "catkin build"]
+RUN echo "source /home/${user}/catkin_ws/devel/setup.bash" >> ~/.bashrc
 RUN ["/bin/bash", "-c", "source ~/.bashrc"]
