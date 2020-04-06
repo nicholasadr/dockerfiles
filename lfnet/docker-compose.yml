@@ -1,0 +1,20 @@
+version: '2.3'
+services:
+  lfnet:
+    image: lfnet:v1.0.0
+    build:
+      context: .
+      args:
+        user: ${dUSER}
+        group: ${dGROUP}
+        uid: ${dUID}
+        gid: ${dGID}
+    user: "${dUID?err}:${dGID?err}"
+    runtime: nvidia
+    tty: true
+    ports:
+    - "${dJUPYTER_PORT?err}:8888"
+    - "${dTENSORBOARD_PORT?err}:6006"
+    volumes:
+    - "${dDRIVE?err}:/data"
+    - "${dWORKSPACE?err}:/home/${dUSER}/workspace"
