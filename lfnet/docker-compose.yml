@@ -1,7 +1,7 @@
 version: '2.3'
 services:
   lfnet:
-    image: lfnet:v1.0.0
+    image: lfnet:v1.0.1
     build:
       context: .
       args:

@@ -36,7 +36,7 @@ RUN git clone https://github.com/vcg-uvic/lf-net-release.git
 # Training on multiple GPUs fail unless keras==2.1.3
 # https://github.com/matterport/Mask_RCNN/issues/511
 RUN cd lf-net-release && pip3 install --no-cache-dir --user $(grep -ivE "tensorflow" requirements.txt) \
-    "tensorflow-gpu>=1.13.0,<2.0" "matplotlib"
+    "tensorflow-gpu>=1.13.0,<2.0" "matplotlib" "scikit-image"
 
 # Jupyter Notebook
 # Allow access from outside the container, and skip trying to open a browser.
