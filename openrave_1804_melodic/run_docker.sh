@@ -12,7 +12,7 @@ else
 	then
 		echo "$SESS COMPOSE_PROJECT_NAME is already defined in .env file. This might indicate that you have already have an existing container from this image. To proceed nevertheless, use -o to overwrite."
 		exit 1
-	elif [ $1==-o ]
+	elif [ $1 == -o ]
 	then
 		echo "$SESS Overwriting COMPOSE_PROJECT_NAME in .env from $PROJ to $PROJID."
 		sed -i "s/$PROJ/$PROJID/g" .env
