@@ -2,7 +2,6 @@ FROM nvidia/opengl:1.0-glvnd-runtime-ubuntu18.04
 MAINTAINER Nicholas Adrian <nicholasadr@ntu.edu.sg>
 
 ENV ROS_DISTRO melodic
-ENV ROSDEP_SRC /tmp/etc/rosdep
 # Some QT-Apps/Gazebo don't show controls without this
 ENV QT_X11_NO_MITSHM 1
 
@@ -36,11 +35,8 @@ RUN apt update && apt install --no-install-recommends -q -y \
     build-essential \
     && rm -rf /var/lib/apt/lists/*
 
-# Set ROSDEP_SOURCE_PATH so that non-root user can access rosdep database
-RUN mkdir -p ${ROSDEP_SRC}
-RUN ROSDEP_SOURCE_PATH=${ROSDEP_SRC} rosdep init
-#    && rosdep update
-#
+RUN rosdep init
+
 WORKDIR /home/${user}
 ENV PATH="/home/${user}/.local/bin:${PATH}"
 USER ${user}
@@ -55,10 +51,8 @@ RUN cd catkin_ws/src && wstool init && \
     wstool set fmauch_universal_robot --git https://github.com/fmauch/universal_robot.git -v calibration_devel -y && \
     wstool update -j8
 
-# Ignore the rosdep update warning
-# https://github.com/ros-infrastructure/rosdep/issues/473
 RUN sudo apt update && \
-    ROSDEP_SOURCE_PATH=${ROSDEP_SRC} rosdep update && \
+    rosdep update && \
     sudo rosdep install --rosdistro ${ROS_DISTRO} --ignore-src --from-paths catkin_ws/src -y
 
 #USER ${user}
