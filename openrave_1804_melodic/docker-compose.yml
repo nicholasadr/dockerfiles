@@ -1,8 +1,7 @@
 version: '2.3'
 services:
   orpy18m:
-    image: openrave-1804-melodic:v1.0.0
-    network_mode: "host"
+    image: openrave-1804-melodic:v2.0.0
     privileged: true
     build:
       context: .
@@ -11,6 +10,8 @@ services:
         group: ${dGROUP}
         uid: ${dUID}
         gid: ${dGID}
+        git_username: ${dGIT_USER}
+        git_email: ${dGIT_EMAIL}
     user: "${dUID?err}:${dGID?err}"
     runtime: nvidia
     tty: true

@@ -9,6 +9,8 @@ ARG user
 ARG group
 ARG uid
 ARG gid
+ARG git_username
+ARG git_email
 # Overwrite interactive installation
 ARG DEBIAN_FRONTEND=noninteractive
 
@@ -41,9 +43,12 @@ WORKDIR /home/${user}
 ENV PATH="/home/${user}/.local/bin:${PATH}"
 USER ${user}
 
+# Set Git credentials
+RUN git config --global user.name ${git_username} && git config --global user.email ${git_email}
+
 # Install OpenRAVE
 RUN mkdir -p ~/git && cd ~/git && \
-    git clone https://github.com/crigroup/openrave-installation.git && \
+    git clone -b feat/18-v0.53.1 https://github.com/nicholasadr/openrave-installation.git && \
     cd openrave-installation && \
     ./install-dependencies.sh
 RUN cd ~/git/openrave-installation && \
