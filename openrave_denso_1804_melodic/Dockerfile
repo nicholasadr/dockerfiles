@@ -69,7 +69,7 @@ RUN mkdir -p catkin_ws/src && cd catkin_ws && \
 
 # Install OpenRAVE
 RUN mkdir -p ~/git && cd ~/git && \
-    git clone https://github.com/crigroup/openrave-installation.git && \
+    git clone -b feat/18-v0.53.1 https://github.com/nicholasadr/openrave-installation.git && \
     cd openrave-installation && \
     ./install-dependencies.sh
 RUN cd ~/git/openrave-installation && \

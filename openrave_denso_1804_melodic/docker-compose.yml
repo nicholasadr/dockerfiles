@@ -1,7 +1,7 @@
 version: '2.3'
 services:
   orpyD18m:
-    image: openrave-denso-1804-melodic:v1.0.0
+    image: openrave-denso-1804-melodic:v1.1.0
     network_mode: "host"
     privileged: true
     build:
