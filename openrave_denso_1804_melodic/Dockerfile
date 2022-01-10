@@ -80,7 +80,7 @@ RUN cd ~/git/openrave-installation && \
     ./install-openrave.sh
 
 RUN cd catkin_ws/src && wstool init && \
-    wstool set denso_common --git git@github.com:quangounet/denso_common.git -v master -y && \
+    wstool set denso_common --git git@github.com:quangounet/denso_common.git -v melodic-devel -y && \
     wstool set bcap --git https://github.com/fsuarez6/bcap.git -v master -y && \
     wstool update -j8
 
